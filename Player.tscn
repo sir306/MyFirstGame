@@ -1,0 +1,104 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://Images/efecto_fuego_00021.png" type="Texture" id=1]
+[ext_resource path="res://Images/efecto_fuego_00024.png" type="Texture" id=2]
+[ext_resource path="res://Images/efecto_fuego_00022.png" type="Texture" id=3]
+[ext_resource path="res://Images/efecto_fuego_00025.png" type="Texture" id=4]
+[ext_resource path="res://Images/efecto_fuego_00023.png" type="Texture" id=5]
+[ext_resource path="res://Images/efecto_fuego_00020.png" type="Texture" id=6]
+[ext_resource path="res://Images/efecto_fuego_00026.png" type="Texture" id=7]
+[ext_resource path="res://Images/efecto_fuego_00027.png" type="Texture" id=8]
+[ext_resource path="res://Images/efecto_fuego_00028.png" type="Texture" id=9]
+[ext_resource path="res://Images/efecto_fuego_00031.png" type="Texture" id=10]
+[ext_resource path="res://Images/efecto_fuego_00029.png" type="Texture" id=11]
+[ext_resource path="res://Images/efecto_fuego_00030.png" type="Texture" id=12]
+[ext_resource path="res://Images/efecto_fuego_00009.png" type="Texture" id=13]
+[ext_resource path="res://Images/efecto_fuego_00010.png" type="Texture" id=14]
+[ext_resource path="res://Images/efecto_fuego_00011.png" type="Texture" id=15]
+[ext_resource path="res://Images/efecto_fuego_00012.png" type="Texture" id=16]
+[ext_resource path="res://Images/efecto_fuego_00013.png" type="Texture" id=17]
+[ext_resource path="res://Images/awa cartoon ship/cartoonship blue.png" type="Texture" id=18]
+[ext_resource path="res://Images/efecto_fuego_00015.png" type="Texture" id=19]
+[ext_resource path="res://Images/efecto_fuego_00019.png" type="Texture" id=20]
+[ext_resource path="res://Images/efecto_fuego_00018.png" type="Texture" id=21]
+[ext_resource path="res://Images/efecto_fuego_00014.png" type="Texture" id=22]
+[ext_resource path="res://Images/efecto_fuego_00016.png" type="Texture" id=23]
+[ext_resource path="res://Images/efecto_fuego_00017.png" type="Texture" id=24]
+[ext_resource path="res://Images/efecto_fuego_00033.png" type="Texture" id=25]
+[ext_resource path="res://Images/efecto_fuego_00032.png" type="Texture" id=26]
+[ext_resource path="res://Player.gd" type="Script" id=27]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 6.0
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 18 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 22 ), ExtResource( 19 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 21 ), ExtResource( 20 ), ExtResource( 6 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 26 ), ExtResource( 25 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Player" type="Area2D" groups=[
+"players",
+]]
+position = Vector2( 0, 0.353554 )
+script = ExtResource( 27 )
+
+[node name="Hit Zone" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -0.471935 )
+scale = Vector2( 2.8, 2.4 )
+shape = SubResource( 1 )
+
+[node name="Ship" type="AnimatedSprite" parent="."]
+position = Vector2( 0.165258, -0.738572 )
+rotation = 1.5708
+scale = Vector2( 0.0488567, 0.0420612 )
+frames = SubResource( 2 )
+
+[node name="Exhaust" type="AnimatedSprite" parent="Ship"]
+position = Vector2( -79.1104, 464.09 )
+rotation = -1.5708
+scale = Vector2( 1, 0.471626 )
+frames = SubResource( 3 )
+frame = 20
+playing = true
+
+[node name="Exhaust2" type="AnimatedSprite" parent="Ship"]
+position = Vector2( 75.4389, 465.963 )
+rotation = -1.5708
+scale = Vector2( 1, 0.471626 )
+frames = SubResource( 3 )
+frame = 23
+playing = true
+
+[node name="Exhaust3" type="AnimatedSprite" parent="Ship"]
+position = Vector2( 33.9578, 511.117 )
+rotation = -1.5708
+scale = Vector2( 1, 0.768257 )
+frames = SubResource( 3 )
+frame = 19
+playing = true
+
+[node name="Exhaust4" type="AnimatedSprite" parent="Ship"]
+position = Vector2( -40.9285, 510.27 )
+rotation = -1.5708
+scale = Vector2( 1, 0.758987 )
+frames = SubResource( 3 )
+frame = 16
+playing = true
+
+[node name="Reload_Timer" type="Timer" parent="Ship"]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
+[connection signal="timeout" from="Ship/Reload_Timer" to="." method="_on_Reload_Timer_timeout"]

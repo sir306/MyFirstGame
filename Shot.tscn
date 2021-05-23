@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Images/laser1.png" type="Texture" id=1]
+[ext_resource path="res://Images/laser2.png" type="Texture" id=2]
+[ext_resource path="res://Images/laser3.png" type="Texture" id=3]
+[ext_resource path="res://Images/laser4.png" type="Texture" id=4]
+[ext_resource path="res://Shot.gd" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 0.984299, 1.85973 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Shot" type="Area2D" groups=[
+"shot",
+]]
+script = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.33371, -0.33371 )
+scale = Vector2( 8, 2 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -0.140308, -1.14031 )
+scale = Vector2( 0.0392481, 0.101775 )
+frames = SubResource( 2 )
+frame = 2
+playing = true
+
+[connection signal="area_entered" from="." to="." method="_on_Shot_area_entered"]

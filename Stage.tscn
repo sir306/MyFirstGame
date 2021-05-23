@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Images/back.png" type="Texture" id=2]
+[ext_resource path="res://Asteroid.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Stage.gd" type="Script" id=4]
+[ext_resource path="res://background.gd" type="Script" id=5]
+
+[node name="stage" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="spawn_timer" type="Timer" parent="."]
+autostart = true
+
+[node name="background" type="Sprite" parent="."]
+scale = Vector2( 0.329255, 0.117633 )
+texture = ExtResource( 2 )
+centered = false
+script = ExtResource( 5 )
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="score" type="Label" parent="ui"]
+margin_left = 3.0
+margin_top = 4.0
+margin_right = 60.0
+margin_bottom = 18.0
+custom_colors/font_color = Color( 0.435294, 1, 0.733333, 1 )
+text = "score: 0"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="retry" type="Label" parent="ui"]
+visible = false
+margin_left = 58.5
+margin_top = 78.0
+margin_right = 265.5
+margin_bottom = 109.0
+custom_colors/font_color = Color( 0.435294, 1, 0.733333, 1 )
+text = "game over
+-press the enter key to retry-
+-press esc to exit-"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 34.4768, 95.3749 )
+
+[node name="Asteroid" parent="." instance=ExtResource( 3 )]
+position = Vector2( 254.655, 77.07 )
